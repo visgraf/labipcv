@@ -7,12 +7,10 @@ Please, [check the course's page](https://lvelho.github.io/ipcv/).
 #### The original GAN based on Multilayer Perceptron architecture.
 
 * [Paper](https://arxiv.org/abs/1406.2661)
-* [Implementation]()
+* [Implementation](https://colab.research.google.com/github/visgraf/labipcv/blob/main/notebooks/BaseGAN.ipynb)
 
 
 #### Some improvements to GANs architecture and training 
 
 * [DCGAN - convolutional architecture](https://arxiv.org/abs/1511.06434)
-* Sprectral Normalization
-* [Implementation]()
-
+* [Implementation](https://colab.research.google.com/github/visgraf/labipcv/blob/main/notebooks/ImprovingGANs.ipynb)

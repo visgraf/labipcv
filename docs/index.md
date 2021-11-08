@@ -12,5 +12,10 @@ Please, [check the course's page](https://lvelho.github.io/ipcv/).
 
 #### Some improvements to GANs architecture and training 
 
-* [DCGAN - convolutional architecture](https://arxiv.org/abs/1511.06434)
+###### DCGAN - convolutional architecture
+
+* [Original paper](https://arxiv.org/abs/1511.06434)
+* [Class slides](https://github.com/visgraf/labipcv/raw/main/docs/dcgan.pdf)
+  
+
 * [Implementation](https://colab.research.google.com/github/visgraf/labipcv/blob/main/notebooks/ImprovingGANs.ipynb)

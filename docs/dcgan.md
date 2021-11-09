@@ -1,23 +1,22 @@
 ---
 marp: true
-theme: blue
+paginate: true
 ---
 <!-- _class: invert -->
-
+<!-- _paginate: false -->
 # Deep Convolutional Generative Adversarial Networks
 
-### Hallison Paz
+## Fundamentals and Trends in Vision and Image Processing
 
-1. Explicar Batch normalization
-2. Explicar strided convolution ("learn pooling")
-3. Explicar como eliminar fully connecterd
+### Hallison Paz
+#### IMPA, November 11 2021
 
 ---
 
-# Contributions
+# Key contributions
 
-- Architectures for training GANs using convolutions.
-- 
+- Proposal o f architecture guidelines for training GANs using convolutions.
+- Analysis of the potential of GANs as tools for unsupervised learning
 
 
 
@@ -30,22 +29,13 @@ theme: blue
 * Already a good strategy for analysis
 
 ---
-# Convolutional architectures mean
+# Architecture guidelines
 
-- Higher resolution
-* Deeper models WHY???
-
----
-# What took it so long?
-
-- From 2014 -> 2016
-
----
-# Key ideas to make convolutional GANs work
-
-- Replace pooling for strided convolutions
-* Eliminate fully connected layers
-* Add **batch normalization**
+- Replace pooling layers with [fractional-]strided convolutions
+* Use batch normalization
+* Remove fully connected hidden layers for deeper architectures 
+* Use **ReLU** in generator, except for the output, which uses **Tanh**.
+* Use **LeakyReLU** in the discriminator
 
 ---
 # Generator Architecture
@@ -55,33 +45,137 @@ theme: blue
 ---
 # Discriminator Architecture
 
-![h:400](img/dcgan-discriminator.png)
+- Last layer is flattened and fed into a sigmoid output.
+
+![bg left:60% h:40%](img/dcgan-discriminator.png)
 
 ---
-# Training
-No pre-processing was applied to training images besides scaling to the range of the tanh activation function [-1, 1]. All models were trained with mini-batch stochastic gradient descent (SGD) with a mini-batch size of 128. All weights were initialized from a zero-centered Normal distribution with standard deviation 0.02. In the LeakyReLU, the slope of the leak was set to 0.2 in all models. While previous GAN work has used momentum to accelerate training, we used the Adam optimizer (Kingma & Ba, 2014) with tuned hyperparameters. We found the suggested learning rate of 0.001, to be too high, using 0.0002 instead. Additionally, we found leaving the momentum term β1 at the
+
+# Pooling vs strided convolutions
+
+![](img/convolution-1-1.png)
+
+<!-- _footer: image from Fei-Fei Li & Justin Johnson & Serena Yeung (CS231n, 2017, lecture 11) -->
+
+---
+# Downsampling with Pooling
+
+![](img/MaxpoolSample2.png)
+
+---
+# Downsampling with Strided convolutions
+
+![](img/convolution-2-1.png)
+
+<!-- _footer: image from Fei-Fei Li & Justin Johnson & Serena Yeung (CS231n, 2017, lecture 11) -->
+
+---
+
+# Upsampling strategies
+
+![](img/upsampling.png)
+
+
+<!-- _footer: image from Fei-Fei Li & Justin Johnson & Serena Yeung (CS231n, 2017, lecture 11) -->
+
+---
+
+
+# Fractional-strided convolutions
+
+![](img/fractional-strided-jj.png)
+
+<!-- _footer: image from Fei-Fei Li & Justin Johnson & Serena Yeung (CS231n, 2017, lecture 11) -->
+
+---
+
+# Fractional-strided convolutions
+
+- Also called transposed convolution
+
+![w:1280](img/transposedconvolution.png)
+
+<!-- _footer: Image from [Transposed Convolution Demystified](https://towardsdatascience.com/transposed-convolution-demystified-84ca81b4baba)-->
+
+---
+
+# Batch Normalization
+
+![](img/batch-normalization.png)
+
+<!-- _footer: Image from https://stackoverflow.com/questions/65613694/calculation-of-mean-and-variance-in-batch-normalization-in-convolutional-neural -->
+
+---
+
+# Relu x Leaky-Relu
+
+![w:1000](img/relu-leakyrelu.jpeg)
+
+---
+<!-- _class: invert -->
+<!-- _paginate: false -->
+
+# Training and Results
+
+---
+# Training details
+
+* Training images scaling to the range of the tanh activation function [-1, 1]
+* SGD with a mini-batch size of 128
+* Weights initialized from a zero-centered Normal distribution ($\sigma=0.02$). 
+* In the LeakyReLU, the slope was set to 0.2 
+* Adam optimizer using lr=0.0002 and momentum term $β_1=0.5$
 
 ---
 # Results
 
 ![](img/lsun-epoch1.png)
 
+<!-- _footer: Generated bedrooms after one epoch of training on LSUN -->
 ---
 # Results
 
 ![](img/lsun-epoch5.png)
 
+<!-- _footer: Generated bedrooms after five epochs of training on LSUN -->
+---
+
+<!-- _class: invert -->
+<!-- _paginate: false -->
+
+# GANs as Tools for Unsupervised Learning
 
 ---
-# Unsupervised learning
 
-![](img/latent-space.png)
+# Visualizing features activations
+
+- The discrimator learned relevant features of the scene
+
+<br/>
+
+![w:1200](img/activation-maps.png)
+
+---
+# Using features for supervised learning
+
+- Using discriminator's features to train a SVM classifier
+<br/>
+
+![](img/supervised-table.png)
 
 ---
 # Walking in the latent space
 
-- Interpolation has semantics
-* A test to validate results
+![](img/latent-space.png)
+
+<!-- _footer: Latent space interpolation -->
+
+---
+# Walking in the latent space
+
+- Interpolation has semantics; 
+  - It learns a manifold.
+* An interesting test to validate results
 
 ![bg right:40% h:780](img/latent-space.png)
 
@@ -90,8 +184,11 @@ No pre-processing was applied to training images besides scaling to the range of
 
 ![](img/vector-arithmetic.png)
 
+
 ---
 
-# Practice
+<!-- _class: invert -->
+<!-- _paginate: false -->
+# Let's see it in practice...
 
-### Next class! #statytuned
+## ...next class! #statytuned

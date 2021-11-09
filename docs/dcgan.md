@@ -15,7 +15,7 @@ paginate: true
 
 # Key contributions
 
-- Proposal o f architecture guidelines for training GANs using convolutions.
+- Proposal of architecture guidelines for training GANs using convolutions.
 - Analysis of the potential of GANs as tools for unsupervised learning
 
 
@@ -122,7 +122,7 @@ paginate: true
 
 * Training images scaling to the range of the tanh activation function [-1, 1]
 * SGD with a mini-batch size of 128
-* Weights initialized from a zero-centered Normal distribution ($\sigma=0.02$). 
+* Weights initialized from a zero-centered Normal distribution (std=0.02). 
 * In the LeakyReLU, the slope was set to 0.2 
 * Adam optimizer using lr=0.0002 and momentum term $β_1=0.5$
 
